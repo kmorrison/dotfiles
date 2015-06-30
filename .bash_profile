@@ -1,8 +1,10 @@
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-HISTSIZE=50000
-HISTFILESIZE=50000
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+export HISTIGNORE="history *:cd *:df *:exit:e:fg:bg:file:e *:ll:ls:mc:top:"
 
 export WORKON_HOME='~/venvs'
 source /usr/local/bin/virtualenvwrapper.sh
@@ -20,11 +22,13 @@ if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
 
-export PS1="$(tput bold setaf 7)\u$(tput sgr0 setaf 7)@$(tput setaf 208)\h:$(tput setaf 80)\w$(tput setaf 120) \t$(tput setaf 208)\$(__git_ps1)$(tput sgr0 setaf 7)\$\n  "
+# homebrew puts its completions in a different spot
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
+fi
+
+# export PS1="$(tput bold setaf 7)\u$(tput sgr0 setaf 7)@$(tput setaf 208)\h:$(tput setaf 80)\w$(tput setaf 120) \t$(tput setaf 208)\$(__git_ps1)$(tput sgr0 setaf 7)\$\n  "
+PS1='\[${BLD}${USER_COLOR}\]\u\[${BLD}${CYN}\]@\[${HOST_COLOR}\]\h\[${BLD}${CYN}\]:\[${YLW}\]\w\[${RST}\]$(__git_ps1 " \[${BLD}${BCYN}\](%s)\[${RST}\] ") \[${BLK}\]\t\n\[${BLK}\]\$\[${RST}\] '
 
 alias l='ls'
 alias ll='ls -loha'
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/kyle/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1

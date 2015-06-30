@@ -46,6 +46,7 @@ noremap gN :cp<CR>
 noremap <leader>c :!ctags -R --languages=
 noremap <leader>] :tn<CR>
 noremap <leader>[ :tp<CR>
+noremap <leader>o :tselect<CR>
 cnoremap %% <C-R>=expand('%:p:h')<CR>/
 noremap <leader>v :e ~/.vimrc<CR>
 
